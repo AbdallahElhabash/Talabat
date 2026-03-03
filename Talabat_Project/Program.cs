@@ -26,8 +26,19 @@ namespace Talabat_Project
 
             using var Scope = app.Services.CreateScope();
             var Services = Scope.ServiceProvider;
-            var DbContext=Services.GetRequiredService<StoreContext>();
-            await DbContext.Database.MigrateAsync();
+            var loggerFactory=Services.GetRequiredService<ILoggerFactory>();
+            try
+            {
+                var DbContext = Services.GetRequiredService<StoreContext>();
+                await DbContext.Database.MigrateAsync();
+            }
+            catch(Exception ex) 
+            {
+                var Logger = loggerFactory.CreateLogger<Program>();
+                Logger.LogError(ex, "An Error Occured During Applying The Migration");
+            }
+
+           
 
             // Configure the HTTP request pipeline.
             #region Configure Middlewares

@@ -13,7 +13,7 @@ namespace Repository.Dtata.Configuration
     {
         public void Configure(EntityTypeBuilder<ProductType> builder)
         {
-            builder.Property(p => p.Name).IsRequired();
+                builder.Property(p => p.Name).IsRequired();
         }
     }
 }

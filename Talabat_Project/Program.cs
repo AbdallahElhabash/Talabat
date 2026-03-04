@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Repository.Data;
 using Repository.Dtata;
 
 namespace Talabat_Project
@@ -31,6 +32,7 @@ namespace Talabat_Project
             {
                 var DbContext = Services.GetRequiredService<StoreContext>();
                 await DbContext.Database.MigrateAsync();
+                await StoreContextSeed.SeedAsync(DbContext);
             }
             catch(Exception ex) 
             {

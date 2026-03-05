@@ -25,7 +25,7 @@ namespace Repository.Dtata.Configuration
             builder.Property(p=>p.Name).IsRequired();
             builder.Property(p=> p.Description).IsRequired();
             builder.Property(p=>p.PictureUrl).IsRequired();
-      //      builder.Property(p => p.price).HasColumnType("decimal(18,2)");
+            builder.Property(p => p.price).HasColumnType("decimal(18,2)");
         }
     }
 }

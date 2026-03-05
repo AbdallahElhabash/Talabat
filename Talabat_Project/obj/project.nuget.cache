@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "flydVv1gGHy/6BT6/7dc3itDD2VR9A7Xm1YVl//uKm9+Cn6l86NbsYZQBBcEZZ3ym6Aa5p32oYDr5Jm0X0wwoQ==",
+  "dgSpecHash": "6rRONg0OKXRe9xjs/Tu5G0+AT5k+f1cUx2dNdsSMN9aFNeZhwLzPQ//7qf5zDv8jxO6jHtb+RTECJlN6DZL82Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\egypt laptop\\Documents\\Talabat API\\Talabat_Project.Solution\\Talabat_Project\\Talabat_Project.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\egypt laptop\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\egypt laptop\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\egypt laptop\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.7\\microsoft.data.sqlclient.2.1.7.nupkg.sha512",
     "C:\\Users\\egypt laptop\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\egypt laptop\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.36\\microsoft.entityframeworkcore.6.0.36.nupkg.sha512",

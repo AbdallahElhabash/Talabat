@@ -78,3 +78,5 @@ C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Pro
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Repository.pdb
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Core.pdb
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\obj\Debug\net6.0\Talabat_Project.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

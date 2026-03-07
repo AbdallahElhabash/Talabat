@@ -5,6 +5,7 @@ using Core.Specifications;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Talabat_Project.DTOs;
+using Talabat_Project.Errors;
 
 namespace Talabat_Project.Controllers
 {
@@ -33,6 +34,7 @@ namespace Talabat_Project.Controllers
         {
             var Spec=new ProductWithBrandAndTypeSpecification(Id);
             var Product = await genaricRepository.GetByIdWithSpecificationAsync(Spec);
+            if (Product is null) return NotFound(new ApiResponse(404));
             var MappedProduct=mapper.Map<Product,ProductToReturnDto>(Product) ;
             return Ok(MappedProduct);
         }

@@ -12,34 +12,51 @@ namespace Talabat_Project.Controllers
 {
     public class ProductController : ApiBaseController
     {
-        private readonly IGenaricRepository<Product> genaricRepository;
+        private readonly IGenaricRepository<Product> ProductRepo;
+        private readonly IGenaricRepository<ProductBrand> BrandRepo;
+        private readonly IGenaricRepository<ProductType> TypeRepo;
         private readonly IMapper mapper;
 
-        public ProductController(IGenaricRepository<Product>GenaricRepository,IMapper _Mapper) 
+        public ProductController(IGenaricRepository<Product> productRepo, IGenaricRepository<ProductBrand> brandRepo, IGenaricRepository<ProductType> typeRepo, IMapper _Mapper)
         {
-            genaricRepository = GenaricRepository;
+            ProductRepo = productRepo;
+            BrandRepo = brandRepo;
+            TypeRepo = typeRepo;
             mapper = _Mapper;
         }
         // Get All Products
         [HttpGet]
-       public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
             var Spec = new ProductWithBrandAndTypeSpecification();
-            var Products = await genaricRepository.GetAllWithSpecificationAsync(Spec);
-            var MappedProduct=mapper.Map<IEnumerable<Product>,IEnumerable<ProductToReturnDto>>(Products) ;
+            var Products = await ProductRepo.GetAllWithSpecificationAsync(Spec);
+            var MappedProduct = mapper.Map<IEnumerable<Product>, IEnumerable<ProductToReturnDto>>(Products);
             return Ok(MappedProduct);
         }
         // Get Product By Id
         [HttpGet("{Id}")]
-        [ProducesResponseType(typeof(ProductToReturnDto),StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse),StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Product>>GetProductById(int Id)
+        [ProducesResponseType(typeof(ProductToReturnDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Product>> GetProductById(int Id)
         {
-            var Spec=new ProductWithBrandAndTypeSpecification(Id);
-            var Product = await genaricRepository.GetByIdWithSpecificationAsync(Spec);
+            var Spec = new ProductWithBrandAndTypeSpecification(Id);
+            var Product = await ProductRepo.GetByIdWithSpecificationAsync(Spec);
             if (Product is null) return NotFound(new ApiResponse(404));
-            var MappedProduct=mapper.Map<Product,ProductToReturnDto>(Product) ;
+            var MappedProduct = mapper.Map<Product, ProductToReturnDto>(Product);
             return Ok(MappedProduct);
         }
-    }
+
+        [HttpGet("Brands")]
+       public async Task<ActionResult<IEnumerable<ProductBrand>>> GetBrands()
+        {
+            var Barnds = await BrandRepo.GetAllAsync();
+            return Ok(Barnds);
+        }
+        [HttpGet("Types")]
+        public async Task<ActionResult<IEnumerable<ProductType>>> GetTypes()
+        {
+            var Types = await TypeRepo.GetAllAsync();
+            return Ok(Types);
+        }
+}
 }

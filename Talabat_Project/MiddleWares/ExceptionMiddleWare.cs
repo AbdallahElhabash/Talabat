@@ -10,10 +10,10 @@ namespace Talabat_Project.MiddleWares
         private readonly ILogger<ExceptionMiddleWare> Logger;
         private readonly IHostEnvironment Env;
 
-        public ExceptionMiddleWare(RequestDelegate next, ILogger<ExceptionMiddleWare> lgger, IHostEnvironment env)
+        public ExceptionMiddleWare(RequestDelegate next,ILogger<ExceptionMiddleWare>logger,IHostEnvironment env)
         {
             Next = next;
-            Logger = lgger;
+            Logger = logger;
             Env = env;
         }
         public async Task InvokeAsync(HttpContext context)
@@ -22,27 +22,27 @@ namespace Talabat_Project.MiddleWares
             {
                 await Next.Invoke(context);
             }
-            catch (Exception ex)
+            catch(Exception ex) 
             {
                 Logger.LogError(ex, ex.Message);
-
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                //if (Env.IsDevelopment())
+                //if(Env.IsDevelopment())
                 //{
-                //    var Response = new ApiInternalServerErrorResponse(ex.StackTrace.ToString());
+                //    var Response=new ApiInternalServerErrorResponse(ex.StackTrace.ToString());
                 //}
                 //else
                 //{
                 //    var Response = new ApiInternalServerErrorResponse();
                 //}
-                var Response = Env.IsDevelopment() ? new ApiInternalServerErrorResponse(ex.StackTrace.ToString()) : new ApiInternalServerErrorResponse(); //Syntax Sugar
+                var Response = Env.IsDevelopment() ? new ApiInternalServerErrorResponse(ex.StackTrace.ToString()) : new ApiInternalServerErrorResponse();
                 var Options = new JsonSerializerOptions()
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 };
-                var JsonResponse = JsonSerializer.Serialize(Response, Options);
+                var JsonResponse=JsonSerializer.Serialize(Response,Options);
                 await context.Response.WriteAsync(JsonResponse);
+
             }
         }
     }

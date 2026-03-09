@@ -4,6 +4,7 @@ using Core.Repositories;
 using Core.Specifications;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Talabat_Project.DTOs;
 using Talabat_Project.Errors;
 
@@ -30,6 +31,8 @@ namespace Talabat_Project.Controllers
         }
         // Get Product By Id
         [HttpGet("{Id}")]
+        [ProducesResponseType(typeof(ProductToReturnDto),StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse),StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Product>>GetProductById(int Id)
         {
             var Spec=new ProductWithBrandAndTypeSpecification(Id);

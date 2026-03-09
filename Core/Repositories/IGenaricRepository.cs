@@ -11,12 +11,12 @@ namespace Core.Repositories
     public interface IGenaricRepository<T> where T : BaseEntity
     {
         #region Without Specification
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IReadOnlyList<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
         #endregion
 
         #region With Specification
-        Task<IEnumerable<T>> GetAllWithSpecificationAsync(ISpecification<T> Spec);
+        Task<IReadOnlyList<T>> GetAllWithSpecificationAsync(ISpecification<T> Spec);
         Task<T>GetByIdWithSpecificationAsync(ISpecification<T> Spec);
         #endregion
     }

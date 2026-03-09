@@ -16,11 +16,19 @@ namespace Repository
         public static IQueryable<T> CreateQuery(IQueryable<T> Query, ISpecification<T> spec) 
         {
             var query = Query;
-             if(spec.Criteria is not null)
+            if (spec.Criteria is not null)
             {
-                query= query.Where(spec.Criteria);
+                query = query.Where(spec.Criteria);
             }
-             query=spec.Includes.Aggregate(query, (CurrentQuery, IncludeExpression) => CurrentQuery.Include(IncludeExpression));
+            if (spec.OrderBy is not null)
+            {
+                query= query.OrderBy(spec.OrderBy);
+            }
+             if(spec.OrderByDesc is not null)
+            {
+                query=query.OrderByDescending(spec.OrderByDesc);
+            }
+            query =spec.Includes.Aggregate(query, (CurrentQuery, IncludeExpression) => CurrentQuery.Include(IncludeExpression));
             return query;
         }
 

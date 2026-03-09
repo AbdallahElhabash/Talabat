@@ -20,7 +20,7 @@ namespace Repository
             dbContext = DbContext;
         }
         #region GetAll and GetById With Specification
-        public async Task<IEnumerable<T>> GetAllWithSpecificationAsync(ISpecification<T> Spec)
+        public async Task<IReadOnlyList<T>> GetAllWithSpecificationAsync(ISpecification<T> Spec)
         {
             return await ApplySpecification(Spec).ToListAsync();
         }
@@ -31,12 +31,9 @@ namespace Repository
         #endregion
 
         #region GetAll and GetById Without Specification
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            if (typeof(T) == typeof(Product))
-            {
-                return (IEnumerable<T>)await dbContext.Products.Include(p => p.ProductBrand).Include(p => p.ProductType).ToListAsync();
-            }
+         
             return await dbContext.Set<T>().ToListAsync();
         }
 

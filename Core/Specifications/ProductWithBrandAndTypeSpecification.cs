@@ -10,15 +10,29 @@ namespace Core.Specifications
 {
     public class ProductWithBrandAndTypeSpecification:BaseSpecificaions<Product>
     {
-        public ProductWithBrandAndTypeSpecification():base()
+        public ProductWithBrandAndTypeSpecification(string? Sort):base()
         {
             Includes.Add(p => p.ProductBrand);
             Includes.Add(p => p.ProductType);
+            if (!string.IsNullOrEmpty(Sort))
+            {
+                switch(Sort)
+                {
+                    case "Price":
+                        AddOrderBy(p => p.price);
+                        break;
+
+                    case "PriceDesc":
+                        AddOrderBy(p => p.price);
+                        break;
+
+                    default:
+                        AddOrderBy(p=>p.Name); 
+                        break;         
+                }
+            }
         }
-        public ProductWithBrandAndTypeSpecification(Expression<Func<Product,bool>>CriteriaExp)
-        {
-            Criteria= CriteriaExp;
-        }
+       
         public ProductWithBrandAndTypeSpecification(int id) : base(p => p.Id == id)
         {
             Includes.Add(p => p.ProductBrand);

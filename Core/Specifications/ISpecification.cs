@@ -14,5 +14,9 @@ namespace Core.Specifications
         Expression<Func<T, bool>> Criteria { get; set; }
         //Sign for property for Includes
         List<Expression<Func<T, object>>> Includes { get; set; }
+        //Sign for Order By
+        Expression<Func<T,object>> OrderBy { get; set; }   
+        //Sign for OrderByDesc
+        Expression<Func<T,object>> OrderByDesc { get; set; }
     }
 }

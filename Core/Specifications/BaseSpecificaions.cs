@@ -12,6 +12,9 @@ namespace Core.Specifications
     {
         public Expression<Func<T, bool>> Criteria { get;set; }
         public List<Expression<Func<T, object>>> Includes { get; set; } = new List<Expression<Func<T, object>>>() { };
+        public Expression<Func<T, object>> OrderBy {get; set;}
+        public Expression<Func<T, object>> OrderByDesc { get; set;}
+
         public BaseSpecificaions() 
         {
           //Includes = new List<Expression<Func<T, object>>>();
@@ -20,6 +23,14 @@ namespace Core.Specifications
         {
             Criteria = CriteriaExp;
          // Includes = new List<Expression<Func<T, object>>>();
+        }
+        public void AddOrderBy(Expression<Func<T, object>> orderBy)
+        {
+            OrderBy = orderBy;
+        }
+        public void AddOrderByDesc(Expression<Func<T, object>> orderByDesc)
+        {
+            OrderByDesc = orderByDesc; 
         }
     }
 }

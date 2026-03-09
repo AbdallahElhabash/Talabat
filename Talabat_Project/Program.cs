@@ -33,13 +33,13 @@ namespace Talabat_Project
             {
                 Options.InvalidModelStateResponseFactory = (ActionContext) =>
                 {
-                    var _Errors = ActionContext.ModelState.Where(p => p.Value.Errors.Count() > 0)
-                                                        .SelectMany(p => p.Value.Errors)
-                                                        .Select(p => p.ErrorMessage)
-                                                        .ToArray();
+                    var errors = ActionContext.ModelState.Where(p => p.Value.Errors.Count() > 0)
+                                                       .SelectMany(p => p.Value.Errors)
+                                                       .Select(p => p.ErrorMessage)
+                                                       .ToArray();
                     var ApiValidationErrorResponse = new ApiValidationErrorResponse()
                     {
-                        Errors = _Errors
+                        Errors = errors
                     };
                     return new BadRequestObjectResult(ApiValidationErrorResponse);
                 };

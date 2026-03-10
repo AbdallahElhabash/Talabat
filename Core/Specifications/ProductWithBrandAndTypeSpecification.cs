@@ -10,32 +10,33 @@ namespace Core.Specifications
 {
     public class ProductWithBrandAndTypeSpecification:BaseSpecificaions<Product>
     {
-        public ProductWithBrandAndTypeSpecification(string? Sort,int ?BrandId,int ?TypeId):
+        public ProductWithBrandAndTypeSpecification(ProductSpecParams Params):
             base(p => 
-                 (!BrandId.HasValue||p.ProductBrandId==BrandId)
+                 (!Params.BrandId.HasValue||p.ProductBrandId==Params.BrandId)
                  &&
-                 (!TypeId.HasValue||p.ProductTypeId==TypeId)
+                 (!Params.TypeId.HasValue||p.ProductTypeId==Params.TypeId)
                 )
         { 
             Includes.Add(p => p.ProductBrand);
             Includes.Add(p => p.ProductType);
-            if (!string.IsNullOrEmpty(Sort))
+            if (!string.IsNullOrEmpty(Params.Sort))
             {
-                switch(Sort)
+                switch (Params.Sort)
                 {
                     case "Price":
                         AddOrderBy(p => p.price);
                         break;
 
                     case "PriceDesc":
-                        AddOrderBy(p => p.price);
+                        AddOrderByDesc(p => p.price);
                         break;
 
                     default:
-                        AddOrderBy(p=>p.Name); 
-                        break;         
+                        AddOrderBy(p => p.Name);
+                        break;
                 }
             }
+            ApplyPagination(Params.PageSize * (Params.PageIndex - 1), Params.PageSize);
         }
        
         public ProductWithBrandAndTypeSpecification(int id) : base(p => p.Id == id)

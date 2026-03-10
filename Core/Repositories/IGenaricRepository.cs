@@ -19,5 +19,6 @@ namespace Core.Repositories
         Task<IReadOnlyList<T>> GetAllWithSpecificationAsync(ISpecification<T> Spec);
         Task<T>GetByIdWithSpecificationAsync(ISpecification<T> Spec);
         #endregion
+        Task<int>GetCountProductsWithSpecificationAsync(ISpecification<T> Spec);
     }
 }

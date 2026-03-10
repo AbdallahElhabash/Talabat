@@ -18,5 +18,10 @@ namespace Core.Specifications
         Expression<Func<T,object>> OrderBy { get; set; }   
         //Sign for OrderByDesc
         Expression<Func<T,object>> OrderByDesc { get; set; }
+        // Sign for Skip
+        public int Skip { get; set; }
+        //Sign for Take
+        public int Take { get; set; }
+        public bool IsPaginationEnabled { get; set; }
     }
 }

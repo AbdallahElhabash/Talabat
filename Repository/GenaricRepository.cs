@@ -47,5 +47,10 @@ namespace Repository
         {
             return SpecificationEvalutor<T>.CreateQuery(dbContext.Set<T>(), Spec);
         }
+
+        public async Task<int> GetCountProductsWithSpecificationAsync(ISpecification<T> Spec)
+        {
+            return await ApplySpecification(Spec).CountAsync();
+        }
     }
 }

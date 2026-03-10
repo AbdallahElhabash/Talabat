@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Talabat_Project.DTOs;
 using Talabat_Project.Errors;
+using Talabat_Project.Helper;
 
 namespace Talabat_Project.Controllers
 {
@@ -26,12 +27,20 @@ namespace Talabat_Project.Controllers
         }
         // Get All Products
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetAllProducts(string? Sort,int?BrandId,int?TypeId)
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetAllProducts([FromQuery]ProductSpecParams Params)
         {
-            var Spec = new ProductWithBrandAndTypeSpecification(Sort,BrandId,TypeId);
+            var Spec = new ProductWithBrandAndTypeSpecification(Params);
             var Products = await ProductRepo.GetAllWithSpecificationAsync(Spec);
             var MappedProduct = mapper.Map<IReadOnlyList<Product>,IReadOnlyList<ProductToReturnDto>>(Products);
-            return Ok(MappedProduct);
+            var CountSpec = new ProductWithFilterationForCountAsync(Params);
+            var ReturnedObject = new Pagination<ProductToReturnDto>()
+            {
+                PageSize = Params.PageSize,
+                PageIndex = Params.PageIndex,
+                Count =await ProductRepo.GetCountProductsWithSpecificationAsync(CountSpec),
+            Data = MappedProduct
+            };
+            return Ok(ReturnedObject);
         }
         // Get Product By Id
         [HttpGet("{Id}")]

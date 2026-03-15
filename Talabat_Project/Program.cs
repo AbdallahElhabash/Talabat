@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Data;
 using Repository.Dtata;
+using StackExchange.Redis;
 using Talabat_Project.Errors;
 using Talabat_Project.Extenssions;
 using Talabat_Project.Helper;
@@ -30,6 +31,11 @@ namespace Talabat_Project
             });
            
             builder.Services.AddApplicationServices();
+            builder.Services.AddSingleton<IConnectionMultiplexer>(Options =>
+            {
+                var Connection = builder.Configuration.GetConnectionString("RedisConnection");
+                return ConnectionMultiplexer.Connect(Connection);
+            });
             #endregion
 
             var app = builder.Build();

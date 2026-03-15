@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "djqFnp102mY9ZAA12GJN5h6uAgvf1rS47RhKxqHXXmuHgq4HgiT5lhXaVOhqI5O55la1kzP2C0q04fFSe2XA6g==",
+  "dgSpecHash": "oRTlmQLwgHWFiksJ3A3LqsHDw9DTlu4D9s3Nu7sFhXU4TNH8WqbLBRn0kNppaRqfmUF4rMm05opI6IGq1JfH2g==",
   "success": true,
   "projectFilePath": "C:\\Users\\egypt laptop\\Documents\\Talabat API\\Talabat_Project.Solution\\Core\\Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\stackexchange.redis\\2.11.8\\stackexchange.redis.2.11.8.nupkg.sha512",
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\system.io.hashing\\9.0.12\\system.io.hashing.9.0.12.nupkg.sha512",
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
+    "C:\\Users\\egypt laptop\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512"
+  ],
   "logs": []
 }

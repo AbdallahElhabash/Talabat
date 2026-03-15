@@ -81,3 +81,6 @@ C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Pro
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Talabat_Project.staticwebassets.runtime.json
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\StackExchange.Redis.dll
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\System.IO.Hashing.dll

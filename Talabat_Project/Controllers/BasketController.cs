@@ -16,7 +16,7 @@ namespace Talabat_Project.Controllers
         }
     
         // Get Or ReCreate Basket
-        [HttpGet("{Id}")]
+        [HttpGet]
         public async Task<ActionResult<CustomerBasket>>GetBasket(string BasketId)
         {
             var Basket=await BasketRepo.GetBasketAsync(BasketId);

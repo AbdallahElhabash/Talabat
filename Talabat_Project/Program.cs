@@ -1,11 +1,16 @@
+using Core.Entites.Identity;
 using Core.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Data;
 using Repository.Dtata;
+using Repository.Identity;
 using StackExchange.Redis;
 using Talabat_Project.Errors;
+using Talabat_Project.Extensions;
 using Talabat_Project.Extenssions;
 using Talabat_Project.Helper;
 using Talabat_Project.MiddleWares;
@@ -29,13 +34,17 @@ namespace Talabat_Project
             {
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-           
+            builder.Services.AddDbContext<AppIdentityDbContext>(Options =>
+            {
+                Options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
+            });
             builder.Services.AddApplicationServices();
             builder.Services.AddSingleton<IConnectionMultiplexer>(Options =>
             {
                 var Connection = builder.Configuration.GetConnectionString("RedisConnection");
                 return ConnectionMultiplexer.Connect(Connection);
             });
+            builder.Services.AddIdentityServices();
             #endregion
 
             var app = builder.Build();
@@ -47,6 +56,10 @@ namespace Talabat_Project
             {
                 var DbContext = Services.GetRequiredService<StoreContext>();
                 await DbContext.Database.MigrateAsync();
+                var IdentityDbContext = Services.GetRequiredService<AppIdentityDbContext>();
+                await IdentityDbContext.Database.MigrateAsync();
+                var UserManager = Services.GetRequiredService<UserManager<AppUser>>();
+                await AppIdentityDbContextSeed.SeedUserAsync(UserManager);
                 await StoreContextSeed.SeedAsync(DbContext);
             }
             catch(Exception ex) 

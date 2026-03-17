@@ -89,3 +89,6 @@ C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Pro
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Services.dll
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Talabat_Project\bin\Debug\net6.0\Services.pdb

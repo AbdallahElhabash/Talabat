@@ -10,3 +10,6 @@ C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Services\ob
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Services\obj\Debug\net6.0\refint\Services.dll
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Services\obj\Debug\net6.0\Services.pdb
 C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Services\obj\Debug\net6.0\ref\Services.dll
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Services\bin\Debug\net6.0\Core.dll
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Services\bin\Debug\net6.0\Core.pdb
+C:\Users\egypt laptop\Documents\Talabat API\Talabat_Project.Solution\Services\obj\Debug\net6.0\Services.csproj.CopyComplete

@@ -44,7 +44,7 @@ namespace Talabat_Project
                 var Connection = builder.Configuration.GetConnectionString("RedisConnection");
                 return ConnectionMultiplexer.Connect(Connection);
             });
-            builder.Services.AddIdentityServices();
+            builder.Services.AddIdentityServices(builder.Configuration);
             #endregion
 
             var app = builder.Build();
@@ -78,9 +78,9 @@ namespace Talabat_Project
                 app.UseSwaggerMiddleWare();
             }
             app.UseStatusCodePagesWithRedirects("/Errors/{0}");
-            app.UseStaticFiles();
-
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

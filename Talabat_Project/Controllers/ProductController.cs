@@ -2,6 +2,8 @@
 using Core.Entites;
 using Core.Repositories;
 using Core.Specifications;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -26,6 +28,7 @@ namespace Talabat_Project.Controllers
             mapper = _Mapper;
         }
         // Get All Products
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetAllProducts([FromQuery]ProductSpecParams Params)
         {

@@ -1,4 +1,5 @@
-﻿using Core.Entites.Identity;
+﻿using AutoMapper;
+using Core.Entites.Identity;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,7 @@ using Services;
 using System.Security.Claims;
 using Talabat_Project.DTOs;
 using Talabat_Project.Errors;
+using Talabat_Project.Extensions;
 
 namespace Talabat_Project.Controllers
 {
@@ -16,12 +18,14 @@ namespace Talabat_Project.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService Token;
+        private readonly IMapper _mapper;
 
-        public AccountsController(UserManager<AppUser> userManager,SignInManager<AppUser>signInManager,ITokenService token)
+        public AccountsController(UserManager<AppUser> userManager,SignInManager<AppUser>signInManager,ITokenService token,IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             Token = token;
+            _mapper = mapper;
         }
         // Register
         [HttpPost("Register")]
@@ -76,6 +80,29 @@ namespace Talabat_Project.Controllers
             };
             return Ok(ReturnedUser);
         }
-        
+
+        // Get Currnt User Address
+        [Authorize]
+        [HttpGet("CurrentUserAddress")]
+        public async Task<ActionResult<AddressDto>> GetCurrentUserAddress()
+        {
+            var user = await _userManager.FindUserWithAddressAsync(User);
+            var MappedAddress = _mapper.Map<Address, AddressDto>(user.Address);
+            return Ok(MappedAddress);
+        }
+
+        [Authorize]
+        [HttpPut("Address")]
+        public async Task<ActionResult<AddressDto>>UpdateAddress(AddressDto UpdatedAddress)
+        {
+            var user=await _userManager.FindUserWithAddressAsync(User);
+            if (user is null) return Unauthorized(new ApiResponse(401));
+            var address = _mapper.Map<AddressDto, Address>(UpdatedAddress);
+            address.Id=user.Address.Id;
+            user.Address = address;
+            var Address=await _userManager.UpdateAsync(user);
+            if (!Address.Succeeded) return BadRequest(new ApiResponse(400));
+            return Ok(UpdatedAddress);
+        }
     }
 }

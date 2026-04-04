@@ -1,9 +1,11 @@
 ﻿using Core.Entites.Identity;
 using Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using System.Security.Claims;
 using Talabat_Project.DTOs;
 using Talabat_Project.Errors;
 
@@ -59,5 +61,21 @@ namespace Talabat_Project.Controllers
             };
             return Ok(ReturnedUser);
         }
+        // Get Currnet User
+        [Authorize]
+        [HttpGet("GetCurrentUser")]
+        public async Task<ActionResult<UserDto>>GetCurrentUser(LogInDto Model)
+        {
+            var Email= User.FindFirstValue(ClaimTypes.Email);
+            var user = await _userManager.FindByEmailAsync(Email);
+            var ReturnedUser = new UserDto()
+            {
+                Email = user.Email,
+                DisplayName = user.DisplayName,
+                Token = await Token.CreateTokenAsync(user, _userManager)
+            };
+            return Ok(ReturnedUser);
+        }
+        
     }
 }

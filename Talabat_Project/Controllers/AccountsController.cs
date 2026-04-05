@@ -31,6 +31,9 @@ namespace Talabat_Project.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto Model)
         {
+            if (CheckDuplicateEmail(Model.Email).Result.Value)
+                return BadRequest(new ApiResponse(400, "This Email is Aready in Use"));
+
             var User = new AppUser()
             {
                 DisplayName = Model.DisplayName,
@@ -93,16 +96,25 @@ namespace Talabat_Project.Controllers
 
         [Authorize]
         [HttpPut("Address")]
-        public async Task<ActionResult<AddressDto>>UpdateAddress(AddressDto UpdatedAddress)
+         public async Task<ActionResult<AddressDto>>UpdateAddress(AddressDto UpdatedAddress)
         {
             var user=await _userManager.FindUserWithAddressAsync(User);
             if (user is null) return Unauthorized(new ApiResponse(401));
             var address = _mapper.Map<AddressDto, Address>(UpdatedAddress);
             address.Id=user.Address.Id;
             user.Address = address;
-            var Address=await _userManager.UpdateAsync(user);
-            if (!Address.Succeeded) return BadRequest(new ApiResponse(400));
+            var Result=await _userManager.UpdateAsync(user);
+            if (!Result.Succeeded) return BadRequest(new ApiResponse(400));
             return Ok(UpdatedAddress);
+        }
+
+        // Validate Duplicate Email at Register EndPoint
+        [HttpGet("EmailExists")]
+        public async Task<ActionResult<bool>>CheckDuplicateEmail(string email)
+        {
+            var user=await _userManager.FindByEmailAsync(email);
+            bool result=user is null ? false : true;
+            return Ok(result);
         }
     }
 }

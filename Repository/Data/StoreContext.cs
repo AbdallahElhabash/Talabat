@@ -1,4 +1,5 @@
 ﻿using Core.Entites;
+using Core.Entites.Order_Aggregate;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,5 +22,8 @@ namespace Repository.Dtata
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductBrand> Brands { get; set; }
         public DbSet<ProductType> Types { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set;}
+        public DbSet<OrderItem> Items { get; set; }
     }
 }

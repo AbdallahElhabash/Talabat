@@ -1,4 +1,6 @@
 ﻿using Core.Entites;
+using Core.Entites.Order_Aggregate;
+using Microsoft.IdentityModel.Protocols;
 using Repository.Dtata;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace Repository.Data
     {
         public static async Task SeedAsync(StoreContext DbContext)
         {
-
+     
             if (!DbContext.Brands.Any())
             {
                 var BrandsData = File.ReadAllText("../Repository/Data/DataSeed/brands.json");
@@ -53,6 +55,20 @@ namespace Repository.Data
                         await DbContext.Set<Product>().AddAsync(product);
                     }
                         await DbContext.SaveChangesAsync();
+                }
+            }
+
+            if (!DbContext.DeliveryMethods.Any())
+            {
+                var DeliveryData = File.ReadAllText("../Repository/Data/DataSeed/delivery.json");
+                var Delivery = JsonSerializer.Deserialize<List<DeliveryMethod>>(DeliveryData);
+                if (Delivery.Count > 0)
+                {
+                    foreach (var delivery in Delivery)
+                    {
+                        await DbContext.Set<DeliveryMethod>().AddAsync(delivery);
+                    }
+                    await DbContext.SaveChangesAsync();
                 }
             }
         }
